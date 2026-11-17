@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junta Administradora Local - Comuna 11</title>
+
+        <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./ASSETS/IMAGES/RECURSOS/logo.png">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        /* Color institucional */
+        .bg-institucional {
+            background-color: #0033a0 !important;
+        }
+        .text-institucional {
+            color: #0033a0 !important;
+        }
+        .btn-institucional {
+            background-color: #0033a0;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-institucional:hover {
+            background-color: #001f66;
+            color: #ffffff;
+        }
+
+        /* Animación suave para tarjetas */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        /* Forzar el peso correcto de los íconos Font Awesome */
+        .fa-solid,
+        .fas {
+            font-weight: 900 !important;
+        }
+        .fa-regular,
+        .far {
+            font-weight: 400 !important;
+        }
+
+        /* ====== NAVBAR ANIMADA ====== */
+
+        /* Transición general de la barra */
+        .navbar {
+            transition: box-shadow 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Enlaces del menú */
+        .navbar .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Color azul institucional al pasar el mouse (todos los enlaces) */
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #0033a0 !important;
+        }
+
+        /* Subrayado animado SOLO en enlaces simples (no en los que tienen flecha/dropdown) */
+        .navbar .nav-link:not(.dropdown-toggle)::after {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.35rem;
+            height: 2px;
+            background-color: #0033a0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.3s ease;
+        }
+
+        /* El subrayado crece al pasar el mouse */
+        .navbar .nav-link:not(.dropdown-toggle):hover::after,
+        .navbar .nav-link:not(.dropdown-toggle):focus::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== Menús desplegables (dropdown) ===== */
+
+        /* Estilo visual de las opciones (aplica en móvil y escritorio) */
+        .navbar .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-weight: 500;
+            color: #334155;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0.6rem;
+            transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .navbar .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: #0033a0;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease;
+        }
+
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus {
+            background-color: #eef2ff;
+            color: #0033a0;
+            padding-left: 1.2rem;
+        }
+
+        .navbar .dropdown-item:hover i {
+            transform: scale(1.15);
+        }
+
+        /* ===== Animación + tarjeta flotante SOLO en escritorio (≥ 992px) ===== */
+        @media (min-width: 992px) {
+            .navbar .dropdown-menu {
+                display: block;              /* para poder animar */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+                pointer-events: none;
+
+                /* Diseño de la tarjeta flotante */
+                margin-top: 0.6rem;
+                padding: 0.5rem;
+                min-width: 15rem;
+                border: 1px solid #eef2ff;
+                border-radius: 0.9rem;
+                box-shadow: 0 0.75rem 1.75rem rgba(0, 51, 160, 0.15);
+                background-color: #ffffff;
+            }
+
+            /* Borde superior de acento institucional */
+            .navbar .dropdown-menu::before {
+                content: "";
+                display: block;
+                height: 3px;
+                width: 40px;
+                background-color: #0033a0;
+                border-radius: 999px;
+                margin: 0.15rem 0 0.5rem 0.75rem;
+            }
+
+            /* Cuando Bootstrap añade .show, lo mostramos animado */
+            .navbar .dropdown-menu.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+        }
+
+        /* ===== Botón "Comentarios y sugerencias" con elevación ===== */
+        .navbar .btn-institucional {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .navbar .btn-institucional:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 51, 160, 0.3);
+        }
+
+        /* ====== CARRUSEL HERO (BANNERS DE CONVOCATORIAS) ====== */
+        /* La imagen se muestra COMPLETA, sin recorte ni zoom */
+        #carouselHero .hero-banner-link {
+            display: block;
+        }
+        #carouselHero .hero-banner-img {
+            width: 100%;
+            height: 100vh;              /* altura fija del carrusel */
+            max-height: 920px;         /* techo en pantallas grandes */
+            object-fit: cover;         /* llena sin deformar (recorta lo que sobre) */
+            object-position: center top;   /* centra el recorte */
+            display: block;
+        }
+
+        /* Transición suave entre slides */
+        #carouselHero .carousel-item {
+            transition: opacity 1s ease, transform 0s;
+        }
+
+        /* Indicadores (puntitos) */
+        #carouselHero .carousel-indicators {
+            margin-bottom: 4rem;
+            z-index: 20;
+        }
+        #carouselHero .carousel-indicators [data-bs-target] {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background-color: rgba(255, 255, 255, 0.4);
+            opacity: 1;
+            margin: 0 5px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #carouselHero .carousel-indicators .active {
+            background-color: #fff;
+            transform: scale(1.2);
+        }
+                /* ====== FLECHAS DEL CARRUSEL ====== */
+        #carouselHero .carousel-control-prev,
+        #carouselHero .carousel-control-next {
+            width: auto;                 /* que no ocupen media pantalla */
+            opacity: 1;
+        }
+
+        /* El círculo de fondo */
+        #carouselHero .carousel-control-prev-icon,
+        #carouselHero .carousel-control-next-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 51, 160, 0.55);  /* azul institucional semitransparente */
+            border-radius: 50%;
+            background-size: 45%;        /* tamaño de la flechita dentro del círculo */
+            margin: 0 1rem;              /* separación del borde */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Al pasar el mouse: más sólido y un poquito más grande */
+        #carouselHero .carousel-control-prev:hover .carousel-control-prev-icon,
+        #carouselHero .carousel-control-next:hover .carousel-control-next-icon {
+            background-color: rgba(0, 51, 160, 0.9);
+            transform: scale(1.1);
+        }
+        /* En celular, las imágenes son verticales: dales más alto */
+        @media (max-width: 767.98px) {
+            #carouselHero .hero-banner-img {
+                max-height: 70vh;        /* ajusta a tu gusto: 60vh, 75vh... */
+                object-fit: contain;     /* muestra el afiche vertical completo */
+                background-color: #0d2b4e;
+            }
+        }
+        .btn-salud {
+            background-color: #0d9488;
+            color: #fff;
+        }
+        .btn-salud:hover {
+            background-color: #0f766e;
+            color: #fff;
+        }
+
+
+        /*Arreglar video pantalla completa */
+        video.card-img-top:fullscreen,
+        video.card-img-top:-webkit-full-screen {
+        object-fit: contain !important;
+        height: 100% !important;
+        width: 100% !important;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-screen">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <!-- LOGO JAL -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+                <img src="./ASSETS/IMAGES/RECURSOS/logo.png" alt="Logo JAL Comuna 11 Medellín" height="50" width="60">
+            </a>
+
+            <!-- BOTON NAVEGACION CELULAR -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarJAL" aria-controls="navbarJAL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <div class="collapse navbar-collapse" id="navbarJAL">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            La JAL
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./LaJal.html">¿Qué es la JAL?</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#funciones">Funciones</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#normatividad">Normatividad</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#faq">Preguntas frecuentes</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#integrantes">Integrantes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold " href="#" id="informacionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Información
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="informacionDropdown">
+                            <li><a class="dropdown-item" href="./informacion.html#noticias">Noticias</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#decretos">Decretos</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pot">POT</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pdl">Plan de Desarrollo Local</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#sesiones">Sesiones en vivo</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="ppDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Presupuesto Participativo
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="ppDropdown">
+                            <li><a class="dropdown-item" href="./pp.html#que-es">¿Qué es el P.P?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#fases">¿Cómo funciona?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#votar">¿Cómo participar?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#documentos">Documentos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="tramitesDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trámites
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="tramitesDropdown">
+                            <li><a class="dropdown-item" href="./certificados/index.php">
+                                <i class="fa-solid fa-file-signature"></i> Certificado de residencia
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="convocatorias.html">Convocatorias</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-salud rounded-pill px-4 fw-bold shadow-sm" href="mental.html">
+                            <i class="fa-solid fa-heart-pulse me-1"></i>Mesa de Salud Mental
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-institucional rounded-pill px-4 fw-bold shadow-sm" href="sugerencias.html">Comentarios y sugerencias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <!-- HERO BANNER (CARRUSEL DE CONVOCATORIAS) -->
+        <section id="inicio">
+            <div id="carouselHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+                <!-- INDICADORES (los puntitos) -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Convocatoria 1"></button>
+                    <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="1" aria-label="Convocatoria 2"></button>
+                    <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="2" aria-label="Convocatoria 3"></button>
+                </div>
+
+                <!-- SLIDES -->
+                <div class="carousel-inner">
+
+                    <!-- SLIDE 1: Elecciones Cabildo Mayor 2026 -->
+                    <div class="carousel-item active">
+                        <a href="./convocatorias.html?conv=cabildo" class="hero-banner-link" title="Ver convocatoria: Elecciones Cabildo Mayor 2026">
+                            <picture>
+                                <!-- Celular (hasta 767px): imagen VERTICAL -->
+                                <source media="(max-width: 767.98px)" srcset="./ASSETS/IMAGES/CONVOCATORIAS/elecciones.jpeg">
+                                <!-- Desktop/tablet: imagen HORIZONTAL -->
+                                <img src="./ASSETS/IMAGES/CONVOCATORIAS/elecciones_horizontal.jpeg"
+                                     alt="Elecciones Cabildo Mayor 2026 - Comuna 11" class="hero-banner-img">
+                            </picture>
+                        </a>
+                    </div>
+
+                    <!-- SLIDE 2: Prótesis dentales removibles -->
+                    <div class="carousel-item">
+                        <a href="./convocatorias.html?conv=protesis" class="hero-banner-link" title="Ver convocatoria: Prótesis dentales removibles">
+                            <picture>
+                                <source media="(max-width: 767.98px)" srcset="./ASSETS/IMAGES/CONVOCATORIAS/protesis.jpeg">
+                                <img src="./ASSETS/IMAGES/CONVOCATORIAS/protesis_horizontal.jpeg"
+                                     alt="Programa de prótesis dentales removibles - Comuna 11" class="hero-banner-img">
+                            </picture>
+                        </a>
+                    </div>
+
+                    <!-- SLIDE 3: Fondos Sapiencia -->
+                    <div class="carousel-item">
+                        <a href="./convocatorias.html?conv=sapiencia" class="hero-banner-link" title="Ver convocatoria: Becas y Matrícula Cero (Sapiencia)">
+                            <picture>
+                                <source media="(max-width: 767.98px)" srcset="./ASSETS/IMAGES/CONVOCATORIAS/sapiencia.jpeg">
+                                <img src="./ASSETS/IMAGES/CONVOCATORIAS/sapiencia_horizontal.jpeg"
+                                     alt="Fondos Sapiencia - Becas y Matrícula Cero" class="hero-banner-img">
+                            </picture>
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <!-- FLECHAS ANTERIOR / SIGUIENTE -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHero" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHero" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- ACCESOS RÁPIDOS -->
+        <section class="container position-relative z-2" style="margin-top: -3rem;">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <a href="./informacion.html#noticias" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-lg rounded-3 card-hover border-top border-4 border-primary">
+                            <div class="card-body p-4 text-center text-md-start">
+                                <div class="text-institucional mb-3"><i class="fa-solid fa-file-signature display-5"></i></div>
+                                <h3 class="h5 fw-bold mb-2 text-dark">Noticias</h3>
+                                <p class="card-text text-muted small">Consulta las últimas noticias de la Junta Administradora Local.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="./mental.html" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-lg rounded-3 card-hover border-top border-4 border-success">
+                            <div class="card-body p-4 text-center text-md-start">
+                                <div class="text-success mb-3"><i class="fa-solid fa-heart-pulse display-5"></i></div>
+                                <h3 class="h5 fw-bold mb-2 text-dark">Mesa de Salud Mental</h3>
+                                <p class="card-text text-muted small">Accede a líneas de ayuda, atención psicológica gratuita y rutas de apoyo para cuidar tu bienestar emocional. No estás solo.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="sugerencias.html" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-lg rounded-3 card-hover border-top border-4 border-primary">
+                            <div class="card-body p-4 text-center text-md-start">
+                                <div class="text-institucional mb-3"><i class="fa-solid fa-comments display-5"></i></div>
+                                <h3 class="h5 fw-bold mb-2 text-dark">Sugerencias</h3>
+                                <p class="card-text text-muted small">Envía tus sugerencias para mejorar los servicios de la Junta Administradora Local.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: RESUMEN "¿QUÉ ES LA JAL?" -->
+        <section id="nuestra-jal" class="py-5 bg-light my-5">
+            <div class="container py-4">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <video src="./ASSETS/VIDEOS/Videoindex.mp4" width="60%" height="100%" controls autoplay muted loop class="rounded-4 shadow-lg d-block mx-auto"></video>
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold text-institucional mb-4">¿Qué es la JAL?</h2>
+                        <p class="text-muted leading-relaxed">
+                            La Junta Administradora Local (JAL) es una corporación pública de elección popular, encargada de ejercer control social, promover la participación ciudadana y coadministrar el desarrollo de la comuna.
+                        </p>
+                        <p class="text-muted leading-relaxed mb-4">
+                            Es el canal directo entre los habitantes y la Administración Municipal. Conoce en detalle sus funciones, su estructura y a sus integrantes.
+                        </p>
+                        <a href="./LaJal.html" class="btn btn-institucional rounded-pill px-4 fw-bold shadow-sm">
+                            Conocer más <i class="fa-solid fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: NOTICIAS -->
+        <section id="noticias" class="py-5 bg-light">
+            <div class="container py-4">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h2 class="fw-bold text-institucional mb-1">Actualidad y Boletines</h2>
+                        <div class="bg-institucional rounded-pill" style="width: 60px; height: 3px;"></div>
+                    </div>
+                    <a href="./informacion.html#noticias" class="text-institucional fw-bold text-decoration-none d-none d-sm-inline-flex align-items-center gap-1">
+                        Ver todas las noticias <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- 👇 Las noticias se cargan automáticamente desde noticias.js -->
+                <div class="row g-4" id="noticias-inicio">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN: CONTACTO -->
+        <section id="contacto" class="py-5 bg-institucional text-white">
+            <div class="container py-4">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold mb-3">Contáctanos</h2>
+                        <div class="bg-white rounded-pill mb-4" style="width: 60px; height: 3px;"></div>
+                        <p class="text-white-50 mb-4 lead fs-6">
+                            Estamos para escucharte. Acércate a nuestra sede o escríbenos. Envía tus sugerencias para mejorar los servicios de la Junta Administradora Local.
+                        </p>
+                        <ul class="list-unstyled d-flex flex-column gap-3 text-white-50 mb-4">
+                            <li class="d-flex align-items-center gap-3"><i class="fa-solid fa-location-dot fs-5 text-white"></i> Cl. 39d #73-113, Primer Parque de Laureles, Laureles-Estadio (Comuna 11), Medellín.</li>
+                            <li class="d-flex align-items-center gap-3"><i class="fa-solid fa-envelope fs-5 text-white"></i> jal.laureles11@gmail.com</li>
+                        </ul>
+                        <div class="mb-4">
+                            <span class="d-block fw-semibold text-white mb-2">Síguenos en redes</span>
+                            <div class="d-flex gap-3">
+                                <a href="https://chat.whatsapp.com/KkKgIqyjIi62TdYUuVUghY" target="_blank" rel="noopener" title="Canal de WhatsApp"
+                                   class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-25 text-white rounded-circle text-decoration-none"
+                                   style="width: 44px; height: 44px">
+                                    <i class="fa-brands fa-whatsapp fs-5"></i>
+                                </a>                                
+                                <a href="https://www.instagram.com/jal11med/" target="_blank" title="Instagram"
+                                   class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-25 text-white rounded-circle text-decoration-none"
+                                   style="width: 44px; height: 44px;">
+                                    <i class="fa-brands fa-instagram fs-5"></i>
+                                </a>
+                                <a href="https://www.facebook.com/p/Jal-Comuna-Once-Medell%C3%ADn-100092500651921/" target="_blank" title="Facebook"
+                                   class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-25 text-white rounded-circle text-decoration-none"
+                                   style="width: 44px; height: 44px;">
+                                    <i class="fa-brands fa-facebook fs-5"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <a href="sugerencias.html" class="btn btn-light rounded-pill px-4 fw-bold text-institucional shadow-sm">
+                            Comentarios y sugerencias <i class="fa-solid fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
+                            <!-- Mapa real de Google Maps (modo embed por búsqueda, sin API key) -->
+                            <div class="ratio ratio-4x3">
+                                <iframe
+                                    src="https://www.google.com/maps?q=Cl.%2039d%20%2373-113%2C%20Laureles%2C%20Medell%C3%ADn%2C%20Antioquia&output=embed"
+                                    title="Ubicación de la sede de la JAL Comuna 11"
+                                    style="border:0;"
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-5 pb-4 border-top border-4 border-primary">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="fa-solid fa-landmark fs-3 text-white"></i>
+                        <span class="fw-bold fs-5">JAL Comuna 11</span>
+                    </div>
+                    <p class="text-secondary small leading-relaxed">
+                        Sitio web oficial de la Junta Administradora Local de la Comuna 11. Trabajando por la transparencia, la gestión eficiente y el desarrollo de nuestro territorio.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Enlaces Institucionales</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><a href="https://www.medellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Alcaldía de Medellín</a></li>
+                        <li><a href="https://www.concejodemedellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Concejo de Medellín</a></li>
+                        <li><a href="LaJal.html#integrantes" class="text-secondary text-decoration-none">Directorio de Ediles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Atención al Ciudadano</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><i class="fa-solid fa-map-location-dot me-2"></i> Cl. 39d #73-113, Primer Parque de Laureles, Laureles-Estadio (Comuna 11), Medellín.</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> jal.laureles11@gmail.com</li>
+                    </ul>
+                    <h3 class="h6 fw-bold mb-3 mt-4 text-uppercase border-bottom border-secondary pb-2">Síguenos</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li>
+                            <a href="https://chat.whatsapp.com/KkKgIqyjIi62TdYUuVUghY" target="_blank" rel="noopener" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-whatsapp me-2"></i> Canal de WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/jal11med/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-instagram me-2"></i> Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/p/Jal-Comuna-Once-Medell%C3%ADn-100092500651921/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-facebook me-2"></i> Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-3 text-center text-secondary small">
+                <p class="mb-0">&copy; 2026 JAL Comuna 11 - Medellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS DE BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SISTEMA DE NOTICIAS (editar solo noticias.js) -->
+    <script src="./noticias.js"></script>
+    <script src="./noticias-render.js"></script>
+
+</body>
+</html>

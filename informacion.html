@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información - JAL Comuna 11</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./ASSETS/IMAGES/RECURSOS/logo.png">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Colores institucionales */
+        .bg-institucional {
+            background-color: #0033a0 !important;
+        }
+
+        .text-institucional {
+            color: #0033a0 !important;
+        }
+
+        .btn-institucional {
+            background-color: #0033a0;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-institucional:hover {
+            background-color: #001f66;
+            color: #ffffff;
+        }
+
+        /* Forzar el peso correcto de los íconos Font Awesome */
+        .fa-solid,
+        .fas {
+            font-weight: 900 !important;
+        }
+
+        .fa-regular,
+        .far {
+            font-weight: 400 !important;
+        }
+
+        /* HERO / encabezado de la página interna */
+       .page-hero {
+            background: linear-gradient(rgba(0, 51, 160, 0.3), rgba(0, 31, 102, 0.3)),
+                url('./ASSETS/IMAGES/BANNERS/informacion.jpeg');
+            background-size: cover;
+            background-position: center 30%;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Menú lateral de pestañas (nav pills mejorado) */
+        #v-pills-tab .nav-link {
+            color: #495057;
+            border-radius: 0.75rem;
+            padding: 0.85rem 1rem;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 4px solid transparent;
+        }
+
+        #v-pills-tab .nav-link:hover {
+            background-color: #eef2ff;
+            color: #0033a0;
+        }
+
+        #v-pills-tab .nav-link.active {
+            background-color: #0033a0 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0.4rem 0.9rem rgba(0, 51, 160, 0.25);
+        }
+
+        #v-pills-tab .nav-link i {
+            width: 22px;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        /* Animación suave al cambiar de pestaña */
+        .tab-pane.active {
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-pane:focus {
+            outline: none !important;
+        }
+
+        /* Tarjetas de información interna */
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0.5rem 1.2rem rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Bloque "Próximamente" para Sesiones en vivo */
+        .proximamente-box {
+            border: 2px dashed #cbd5e1;
+            border-radius: 1rem;
+            background-color: #f8fafc;
+        }
+
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        /* ====== NAVBAR ANIMADA ====== */
+
+        /* Transición general de la barra */
+        .navbar {
+            transition: box-shadow 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Enlaces del menú */
+        .navbar .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Color azul institucional al pasar el mouse (todos los enlaces) */
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #0033a0 !important;
+        }
+
+        /* Subrayado animado SOLO en enlaces simples (no en los que tienen flecha/dropdown) */
+        .navbar .nav-link:not(.dropdown-toggle)::after {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.35rem;
+            height: 2px;
+            background-color: #0033a0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.3s ease;
+        }
+
+        /* El subrayado crece al pasar el mouse */
+        .navbar .nav-link:not(.dropdown-toggle):hover::after,
+        .navbar .nav-link:not(.dropdown-toggle):focus::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== Menús desplegables (dropdown) ===== */
+
+        /* Estilo visual de las opciones (aplica en móvil y escritorio) */
+        .navbar .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-weight: 500;
+            color: #334155;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0.6rem;
+            transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .navbar .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: #0033a0;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease;
+        }
+
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus {
+            background-color: #eef2ff;
+            color: #0033a0;
+            padding-left: 1.2rem;
+        }
+
+        .navbar .dropdown-item:hover i {
+            transform: scale(1.15);
+        }
+
+        /* ===== Animación + tarjeta flotante SOLO en escritorio (≥ 992px) ===== */
+        @media (min-width: 992px) {
+            .navbar .dropdown-menu {
+                display: block;              /* para poder animar */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+                pointer-events: none;
+
+                /* Diseño de la tarjeta flotante */
+                margin-top: 0.6rem;
+                padding: 0.5rem;
+                min-width: 15rem;
+                border: 1px solid #eef2ff;
+                border-radius: 0.9rem;
+                box-shadow: 0 0.75rem 1.75rem rgba(0, 51, 160, 0.15);
+                background-color: #ffffff;
+            }
+
+            /* Borde superior de acento institucional */
+            .navbar .dropdown-menu::before {
+                content: "";
+                display: block;
+                height: 3px;
+                width: 40px;
+                background-color: #0033a0;
+                border-radius: 999px;
+                margin: 0.15rem 0 0.5rem 0.75rem;
+            }
+
+            /* Cuando Bootstrap añade .show, lo mostramos animado */
+            .navbar .dropdown-menu.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+        }
+        /* Esconder texto extra */
+        .texto-extra { display: none; }
+        .texto-extra.mostrar { display: inline; }
+
+        /*Arreglar video pantalla completa */
+        video.card-img-top:fullscreen,
+        video.card-img-top:-webkit-full-screen {
+        object-fit: contain !important;
+        height: 100% !important;
+        width: 100% !important;
+        }
+
+        .btn-salud {
+            background-color: #0d9488;
+            color: #fff;
+        }
+        .btn-salud:hover {
+            background-color: #0f766e;
+            color: #fff;
+        }
+        /* ===== Botón "Comentarios y sugerencias" con elevación ===== */
+        .navbar .btn-institucional {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .navbar .btn-institucional:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 51, 160, 0.3);
+        }
+
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <!-- LOGO JAL -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+                <img src="./ASSETS/IMAGES/RECURSOS/logo.png" alt="Logo JAL Comuna 11 Medellín" height="50" width="60">
+            </a>
+
+            <!-- BOTÓN NAVEGACIÓN CELULAR -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarJAL"
+                aria-controls="navbarJAL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <div class="collapse navbar-collapse" id="navbarJAL">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Inicio</a>
+                    </li>
+
+                    <!-- DESPLEGABLE 1: La JAL -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            La JAL
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./LaJal.html">¿Qué es la JAL?</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#funciones">Funciones</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#normatividad">Normatividad</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#faq">Preguntas frecuentes</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#integrantes">Integrantes</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- DESPLEGABLE 2: Información -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="InformaciónDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Información
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="InformaciónDropdown">
+                            <li><a class="dropdown-item" href="./informacion.html#noticias">Noticias</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#decretos">Decretos</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pot">POT</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pdl">Plan de Desarrollo Local</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#sesiones">Sesiones en vivo</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="ppDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Presupuesto Participativo
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="ppDropdown">
+                            <li><a class="dropdown-item" href="./pp.html#que-es">¿Qué es el P.P?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#fases">¿Cómo funciona?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#votar">¿Cómo participar?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#documentos">Documentos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="tramitesDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trámites
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="tramitesDropdown">
+                            <li><a class="dropdown-item" href="./certificados/index.php">
+                                <i class="fa-solid fa-file-signature"></i> Certificado de residencia
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold active" aria-current="page" href="./convocatorias.html">Convocatorias</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-salud rounded-pill px-4 fw-bold shadow-sm" href="mental.html">
+                            <i class="fa-solid fa-heart-pulse me-1"></i>Mesa de Salud Mental
+                        </a>
+                    </li>
+                    <!-- BOTÓN Comentarios y sugerencias -->
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-institucional rounded-pill px-4 fw-bold shadow-sm"
+                            href="sugerencias.html">Comentarios y sugerencias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow-1" style="padding-top: 76px;">
+
+        <!-- HERO INTERNO -->
+        <section class="page-hero text-white py-5 text-center">
+            <div class="container py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-3">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-white-50 text-decoration-none">Inicio</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Información</li>
+                    </ol>
+                </nav>
+                <h1 class="display-5 fw-bold mb-2">Información</h1>
+                <p class="lead text-white-50 mb-0 mx-auto" style="max-width: 650px;">
+                    Noticias, decretos y sesiones de la Junta Administradora Local de la Comuna 11, al alcance de toda la ciudadanía.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONTENIDO CON PESTAÑAS -->
+        <section class="py-5">
+            <div class="container py-2">
+                <div class="row g-4">
+
+                    <!-- COLUMNA IZQUIERDA: Menú de tópicos (Nav Pills) -->
+                    <div class="col-lg-4 col-xl-3">
+                        <div class="position-sticky" style="top: 100px;">
+                            <h2 class="h6 text-uppercase text-muted fw-bold mb-3 ps-1" style="letter-spacing: 1px;">
+                                Explora las secciones
+                            </h2>
+                            <div class="nav flex-column nav-pills bg-white shadow-sm rounded-4 p-2 border"
+                                id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                                <button class="nav-link active fw-semibold mb-1" id="noticias-tab" data-bs-toggle="pill"
+                                    data-bs-target="#noticias" type="button" role="tab" aria-controls="noticias"
+                                    aria-selected="true">
+                                    <i class="fa-solid fa-newspaper"></i>
+                                    <span>Noticias</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold mb-1" id="decretos-tab" data-bs-toggle="pill"
+                                    data-bs-target="#decretos" type="button" role="tab" aria-controls="decretos"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                    <span>Decretos</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold mt-1" id="pot-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pot" type="button" role="tab" aria-controls="pot"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <span>POT</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold mt-1" id="pdl-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pdl" type="button" role="tab" aria-controls="pdl"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-diagram-project"></i>
+                                    <span>Plan de Desarrollo Local</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold" id="sesiones-tab" data-bs-toggle="pill"
+                                    data-bs-target="#sesiones" type="button" role="tab" aria-controls="sesiones"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-video"></i>
+                                    <span>Sesiones en vivo</span>
+                                </button>
+
+                            </div>
+
+                            <!-- Tarjeta de ayuda / contacto rápido -->
+                            <div class="card border-0 shadow-sm rounded-4 mt-4 bg-institucional text-white">
+                                <div class="card-body p-4">
+                                    <i class="fa-solid fa-circle-question fs-3 mb-2"></i>
+                                    <h3 class="h6 fw-bold">¿Tienes dudas?</h3>
+                                    <p class="small text-white-50 mb-3">Radica tu petición y te responderemos en los tiempos de ley.</p>
+                                    <a href="sugerencias.html" class="btn btn-light btn-sm rounded-pill fw-bold text-institucional w-100">
+                                        Comentarios y sugerencias
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUMNA DERECHA: Contenido (Tab Content) -->
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="tab-content bg-white p-4 p-lg-5 rounded-4 shadow-sm border-top border-4 border-primary"
+                            id="v-pills-tabContent">
+                            <!-- ====== CONTENIDO 1: NOTICIAS ====== -->
+                            <div class="tab-pane fade show active" id="noticias" role="tabpanel"
+                                aria-labelledby="noticias-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 1</span>
+                                <h2 class="fw-bold text-institucional mb-2">Noticias y Boletines</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    Mantente al día con las actividades, recorridos y decisiones de la JAL de la Comuna 11.
+                                </p>
+
+                                <!-- 👇 Las noticias se cargan automáticamente desde noticias.js -->
+                                <div class="row g-4" id="noticias-info">
+                                </div>
+                            </div>
+
+
+                            <!-- ====== CONTENIDO 2: DECRETOS ====== -->
+                            <div class="tab-pane fade" id="decretos" role="tabpanel"
+                                aria-labelledby="decretos-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 2</span>
+                                <h2 class="fw-bold text-institucional mb-2">Decretos y Documentos</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    Consulta y descarga los decretos, actas y acuerdos locales de la corporación.
+                                </p>
+
+                                <div class="card border rounded-3 overflow-hidden shadow-sm">
+                                    <div class="list-group list-group-flush">
+                                        <!-- Encabezado -->
+                                        <div class="list-group-item bg-light fw-bold text-secondary d-flex justify-content-between align-items-center py-3">
+                                            <span style="width: 20%;">Fecha</span>
+                                            <span style="width: 65%;">Documento</span>
+                                            <span style="width: 15%;" class="text-end">Descarga</span>
+                                        </div>
+
+                                        <!-- Decreto 1 (ejemplo) -->
+                                        <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                            <span class="text-muted small" style="width: 20%;">Oct 2026</span>
+                                            <div class="d-flex align-items-center gap-2" style="width: 65%;">
+                                                <i class="fa-solid fa-file-pdf text-danger fs-4"></i>
+                                                <div>
+                                                    <h3 class="h6 mb-0 text-dark fw-semibold">Acta Ordinaria No. 045</h3>
+                                                    <small class="text-muted d-block">Debate sobre presupuesto 2027.</small>
+                                                </div>
+                                            </div>
+                                            <div style="width: 15%;" class="text-end">
+                                                <!-- Reemplaza el href="#" por la ruta real del PDF, ej: ./DOCUMENTOS/acta-045.pdf -->
+                                                <a href="#" class="btn btn-light text-institucional btn-sm" title="Descargar PDF" download>
+                                                    <i class="fa-solid fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Decreto 2 (ejemplo) -->
+                                        <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                            <span class="text-muted small" style="width: 20%;">Sep 2026</span>
+                                            <div class="d-flex align-items-center gap-2" style="width: 65%;">
+                                                <i class="fa-solid fa-file-pdf text-danger fs-4"></i>
+                                                <div>
+                                                    <h3 class="h6 mb-0 text-dark fw-semibold">Acuerdo Local 02 de 2026</h3>
+                                                    <small class="text-muted d-block">Reglamentación interna de comisiones.</small>
+                                                </div>
+                                            </div>
+                                            <div style="width: 15%;" class="text-end">
+                                                <a href="#" class="btn btn-light text-institucional btn-sm" title="Descargar PDF" download>
+                                                    <i class="fa-solid fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Decreto 3 (ejemplo) -->
+                                        <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                            <span class="text-muted small" style="width: 20%;">Ago 2026</span>
+                                            <div class="d-flex align-items-center gap-2" style="width: 65%;">
+                                                <i class="fa-solid fa-file-pdf text-danger fs-4"></i>
+                                                <div>
+                                                    <h3 class="h6 mb-0 text-dark fw-semibold">Resolución No. 012 de 2026</h3>
+                                                    <small class="text-muted d-block">Convocatoria a sesiones descentralizadas.</small>
+                                                </div>
+                                            </div>
+                                            <div style="width: 15%;" class="text-end">
+                                                <a href="#" class="btn btn-light text-institucional btn-sm" title="Descargar PDF" download>
+                                                    <i class="fa-solid fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="text-muted small mt-3 mb-0">
+                                    <i class="fa-solid fa-circle-info text-institucional me-1"></i>
+                                    Para publicar un decreto: sube el PDF a la carpeta del sitio y reemplaza el enlace de descarga por la ruta del archivo.
+                                </p>
+                            </div>
+
+                            <!-- ====== CONTENIDO 3: POT ====== -->
+                            <div class="tab-pane fade" id="pot" role="tabpanel"
+                                aria-labelledby="pot-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 3</span>
+                                <h2 class="fw-bold text-institucional mb-2">Plan de Ordenamiento Territorial (POT)</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    El <strong>Plan de Ordenamiento Territorial (POT)</strong> es el instrumento técnico y normativo
+                                    con el que el Distrito de Medellín organiza y planea el uso del suelo de todo su territorio:
+                                    define dónde se puede construir, las zonas de protección ambiental, el espacio público, la
+                                    movilidad y el modelo de ciudad a largo plazo. Medellín se rige actualmente por el POT
+                                    adoptado mediante el <strong>Acuerdo 048 de 2014</strong>.
+                                </p>
+
+                                <div class="alert alert-light border d-flex gap-3 align-items-start mb-4" role="alert">
+                                    <i class="fa-solid fa-circle-info text-institucional fs-4 mt-1"></i>
+                                    <div>
+                                        <h3 class="h6 fw-bold mb-1">¿Por qué le interesa a la Comuna 11?</h3>
+                                        <p class="small text-muted mb-0">
+                                            El POT aplica a toda la ciudad, pero determina las normas de uso del suelo, alturas,
+                                            tratamientos y proyectos que afectan directamente a los barrios de la Comuna 11
+                                            (Laureles-Estadio). Conocerlo te permite entender qué se puede hacer en tu sector.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="card border rounded-3 overflow-hidden shadow-sm">
+                                    <div class="list-group list-group-flush">
+
+                                        <!-- Enlace oficial: ¿Qué es el POT? -->
+                                        <div class="list-group-item d-flex align-items-center gap-3 py-3">
+                                            <i class="fa-solid fa-building-columns text-institucional fs-4 flex-shrink-0"></i>
+                                            <div class="flex-grow-1 min-w-0">
+                                                <h3 class="h6 mb-0 text-dark fw-semibold">POT de Medellín (sitio oficial)</h3>
+                                                <small class="text-muted d-block">Acuerdo 048 de 2014 — Alcaldía de Medellín.</small>
+                                            </div>
+                                            <a href="https://www.medellin.gov.co/es/transparencia/plan-de-ordenamiento-territorial-de-medellin/que-es-pot/"
+                                                target="_blank" rel="noopener" class="btn btn-light text-institucional btn-sm flex-shrink-0" title="Ver en el sitio oficial">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                        </div>
+
+                                        <!-- Documento PDF (Próximamente) -->
+                                        <div class="list-group-item d-flex align-items-center gap-3 py-3">
+                                            <i class="fa-solid fa-file-pdf text-secondary fs-4 flex-shrink-0"></i>
+                                            <div class="flex-grow-1 min-w-0">
+                                                <h3 class="h6 mb-0 text-dark fw-semibold">Documento resumen (PDF)</h3>
+                                                <small class="text-muted d-block">Próximamente disponible para descarga.</small>
+                                            </div>
+                                            <span class="badge bg-secondary-subtle text-secondary rounded-pill flex-shrink-0">Próximamente</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- ====== CONTENIDO 4: PLAN DE DESARROLLO LOCAL ====== -->
+                            <div class="tab-pane fade" id="pdl" role="tabpanel"
+                                aria-labelledby="pdl-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 4</span>
+                                <h2 class="fw-bold text-institucional mb-2">Plan de Desarrollo Local (PDL)</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    El <strong>Plan de Desarrollo Local (PDL)</strong> es la hoja de ruta que define las
+                                    prioridades, programas y proyectos para el desarrollo de nuestra comuna. Se construye de
+                                    manera participativa entre la comunidad y la Administración Municipal, y orienta la
+                                    inversión de recursos —entre ellos los del Presupuesto Participativo— en el territorio.
+                                    Cada comuna y corregimiento de Medellín cuenta con su propio PDL.
+                                </p>
+
+                                <div class="alert alert-light border d-flex gap-3 align-items-start mb-4" role="alert">
+                                    <i class="fa-solid fa-users text-institucional fs-4 mt-1"></i>
+                                    <div>
+                                        <h3 class="h6 fw-bold mb-1">La JAL y el PDL</h3>
+                                        <p class="small text-muted mb-0">
+                                            La Junta Administradora Local participa en la formulación y el seguimiento del Plan
+                                            de Desarrollo Local, velando por que las prioridades de la comunidad de la Comuna 11
+                                            queden reflejadas en la planeación y la inversión.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="card border rounded-3 overflow-hidden shadow-sm">
+                                    <div class="list-group list-group-flush">
+                                        <!-- Enlace oficial: Planes de Desarrollo Local -->
+                                        <div class="list-group-item d-flex align-items-center gap-3 py-3">
+                                            <i class="fa-solid fa-diagram-project text-institucional fs-4 flex-shrink-0"></i>
+                                            <div class="flex-grow-1 min-w-0">
+                                                <h3 class="h6 mb-0 text-dark fw-semibold">Planes de Desarrollo Local (sitio oficial)</h3>
+                                                <small class="text-muted d-block">Secretaría de Participación Ciudadana — Alcaldía de Medellín.</small>
+                                            </div>
+                                            <a href="https://www.medellin.gov.co/ndesarrollo/pdl/"
+                                                target="_blank" rel="noopener" class="btn btn-light text-institucional btn-sm flex-shrink-0" title="Ver en el sitio oficial">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                        </div>
+
+                                        <!-- Documento PDF (Próximamente) -->
+                                        <div class="list-group-item d-flex align-items-center gap-3 py-3">
+                                            <i class="fa-solid fa-file-pdf text-secondary fs-4 flex-shrink-0"></i>
+                                            <div class="flex-grow-1 min-w-0">
+                                                <h3 class="h6 mb-0 text-dark fw-semibold">PDL Comuna 11 (PDF)</h3>
+                                                <small class="text-muted d-block">Próximamente disponible para descarga.</small>
+                                            </div>
+                                            <span class="badge bg-secondary-subtle text-secondary rounded-pill flex-shrink-0">Próximamente</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- ====== CONTENIDO 5: SESIONES EN VIVO ====== -->
+                            <div class="tab-pane fade" id="sesiones" role="tabpanel"
+                                aria-labelledby="sesiones-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 5</span>
+                                <h2 class="fw-bold text-institucional mb-2">Sesiones en vivo</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    Transmitiremos en directo las sesiones de la JAL a través de nuestro canal oficial de YouTube.
+                                </p>
+
+                                <!-- BLOQUE "PRÓXIMAMENTE" (visible mientras no exista el canal) -->
+                                <div class="proximamente-box text-center p-5 mb-3">
+                                    <i class="fa-brands fa-youtube text-danger" style="font-size: 3.5rem;"></i>
+                                    <h3 class="h4 fw-bold text-dark mt-3 mb-2">Próximamente</h3>
+                                    <p class="text-muted mb-0 mx-auto" style="max-width: 480px;">
+                                        Estamos preparando nuestro canal oficial de YouTube para transmitir las sesiones
+                                        en vivo. Muy pronto podrás seguirlas desde aquí.
+                                    </p>
+                                </div>
+
+                                <!--
+                                ============================================================
+                                👉 CUANDO EL CANAL DE YOUTUBE YA EXISTA:
+                                   1) Borra (o comenta) el bloque "proximamente-box" de arriba.
+                                   2) Descomenta este bloque y reemplaza VIDEO_ID_AQUI
+                                      por el ID del video/transmisión en vivo.
+                                      Ejemplo de URL en vivo:
+                                      https://www.youtube.com/embed/live_stream?channel=TU_CHANNEL_ID
+                                ============================================================
+                                <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm">
+                                    <iframe
+                                        src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
+                                        title="Sesión en vivo - JAL Comuna 11"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-5 pb-4 border-top border-4 border-primary mt-auto">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="fa-solid fa-landmark fs-3 text-white"></i>
+                        <span class="fw-bold fs-5">JAL Comuna 11</span>
+                    </div>
+                    <p class="text-secondary small leading-relaxed">
+                        Sitio web oficial de la Junta Administradora Local de la Comuna 11. Trabajando por la
+                        Información, la gestión eficiente y el desarrollo de nuestro territorio.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Enlaces Institucionales</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><a href="https://www.medellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Alcaldía de Medellín</a></li>
+                        <li><a href="https://www.concejodemedellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Concejo de Medellín</a></li>
+                        <li><a href="LaJal.html#integrantes" class="text-secondary text-decoration-none">Directorio de Ediles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Atención al Ciudadano</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><i class="fa-solid fa-map-location-dot me-2"></i> Cl. 39d #73-113, Primer Parque de Laureles, Laureles-Estadio (Comuna 11), Medellín.</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> jal.laureles11@gmail.com</li>
+                    </ul>
+                    <h3 class="h6 fw-bold mb-3 mt-4 text-uppercase border-bottom border-secondary pb-2">Síguenos</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li>
+                            <a href="https://chat.whatsapp.com/KkKgIqyjIi62TdYUuVUghY" target="_blank" rel="noopener" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-whatsapp me-2"></i> Canal de WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/jal11med/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-instagram me-2"></i> Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/p/Jal-Comuna-Once-Medell%C3%ADn-100092500651921/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-facebook me-2"></i> Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-3 text-center text-secondary small">
+                <p class="mb-0">&copy; 2026 JAL Comuna 11 - Medellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPT DE ACTIVACIÓN Y NAVEGACIÓN DE PESTAÑAS (mismo que LaJal.html) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            function activarPestana(hash) {
+                if (!hash) return;
+                let botonPestana = document.querySelector('button[data-bs-target="' + hash + '"]');
+                if (botonPestana) {
+                    let tab = new bootstrap.Tab(botonPestana);
+                    tab.show();
+                    setTimeout(function () {
+                        window.scrollTo({ top: 0, behavior: 'instant' });
+                    }, 0);
+                }
+            }
+
+            activarPestana(window.location.hash);
+
+            window.addEventListener("hashchange", function () {
+                activarPestana(window.location.hash);
+            });
+
+            document.querySelectorAll('#v-pills-tab button[data-bs-toggle="pill"]').forEach(function (boton) {
+                boton.addEventListener("shown.bs.tab", function (e) {
+                    let target = e.target.getAttribute("data-bs-target");
+                    if (target) {
+                        history.replaceState(null, "", target);
+                    }
+                });
+            });
+
+            document.querySelectorAll('a[href*="#"]').forEach(function (enlace) {
+                enlace.addEventListener("click", function () {
+                    let href = enlace.getAttribute("href");
+                    let hash = href.substring(href.indexOf("#"));
+                    if (document.querySelector('button[data-bs-target="' + hash + '"]')) {
+                        activarPestana(hash);
+                    }
+                });
+            });
+        });
+
+        function toggleLeerMas(e, btn) {
+        e.preventDefault();
+        const extra = btn.closest('.card').querySelector('.texto-extra');
+        extra.classList.toggle('mostrar');
+        btn.textContent = extra.classList.contains('mostrar') ? 'Leer menos' : 'Leer más';
+        }
+    </script>
+    <!-- SISTEMA DE NOTICIAS (editar solo noticias.js) -->
+    <script src="./noticias.js"></script>
+    <script src="./noticias-render.js"></script>
+
+
+</body>
+
+</html>

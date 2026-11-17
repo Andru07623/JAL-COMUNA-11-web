@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convocatorias - JAL Comuna 11</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./ASSETS/IMAGES/RECURSOS/logo.png">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Colores institucionales */
+        .bg-institucional {
+            background-color: #0033a0 !important;
+        }
+
+        .text-institucional {
+            color: #0033a0 !important;
+        }
+
+        .btn-institucional {
+            background-color: #0033a0;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-institucional:hover {
+            background-color: #001f66;
+            color: #ffffff;
+        }
+
+        /* Forzar el peso correcto de los íconos Font Awesome */
+        .fa-solid,
+        .fas {
+            font-weight: 900 !important;
+        }
+
+        .fa-regular,
+        .far {
+            font-weight: 400 !important;
+        }
+
+        /* HERO / encabezado de la página interna */
+       .page-hero {
+            background: linear-gradient(rgba(0, 51, 160, 0.3), rgba(0, 31, 102, 0.3)),
+                url('./ASSETS/IMAGES/BANNERS/convocatorias.jpg');
+            background-size: cover;
+            background-position: center 45%;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Animación suave para tarjetas */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+    /* ====== TARJETAS DE CONVOCATORIA ====== */
+        /* ===== Indicador de estado tipo "semáforo" (puntico con brillo) ===== */
+            .estado-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                background-color: #ffffff;
+                border-radius: 999px;
+                padding: 0.3rem 0.75rem 0.3rem 0.5rem;
+                font-size: 0.75rem;
+                font-weight: 700;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            }
+
+            /* El puntico con degradado y brillo */
+            .estado-dot {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                flex-shrink: 0;
+                position: relative;
+            }
+
+            /* Brillo (reflejo) encima del puntico */
+            .estado-dot::after {
+                content: "";
+                position: absolute;
+                top: 2px;
+                left: 2.5px;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.85);
+            }
+
+            /* Colores por estado (degradado radial para dar volumen) */
+            .estado-dot.verde {
+                background: radial-gradient(circle at 35% 30%, #7be495, #1f9d4d);
+            }
+            .estado-dot.verde + span { color: #1f9d4d; }
+
+            .estado-dot.amarillo {
+                background: radial-gradient(circle at 35% 30%, #ffe08a, #e0a000);
+            }
+            .estado-dot.amarillo + span { color: #b47d00; }
+
+            .estado-dot.rojo {
+                background: radial-gradient(circle at 35% 30%, #ff8a8a, #d12b2b);
+            }
+            .estado-dot.rojo + span { color: #d12b2b; }
+
+
+        /* Encabezado de color de cada tarjeta (franja superior) */
+        .conv-header {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conv-header i {
+            font-size: 3rem;
+            opacity: 0.95;
+        }
+
+        /* Badge de estado en la esquina */
+        .conv-estado {
+            position: absolute;
+            top: 0.85rem;
+            right: 0.85rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* Categoría pequeña sobre el título */
+        .conv-categoria {
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Lista de datos (fecha, dirigido a, etc.) */
+        .conv-datos li {
+            font-size: 0.85rem;
+        }
+
+        .conv-datos li i {
+            width: 18px;
+            text-align: center;
+        }
+
+        /* ===== Encabezados de bloque por estado ===== */
+        .bloque-estado {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .bloque-estado .bloque-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .bloque-estado .bloque-dot.verde {
+            background: radial-gradient(circle at 35% 30%, #7be495, #1f9d4d);
+        }
+        .bloque-estado .bloque-dot.amarillo {
+            background: radial-gradient(circle at 35% 30%, #ffe08a, #e0a000);
+        }
+        .bloque-estado .bloque-dot.rojo {
+            background: radial-gradient(circle at 35% 30%, #ff8a8a, #d12b2b);
+        }
+
+        .bloque-estado h2 {
+            margin: 0;
+            font-size: 1.35rem;
+        }
+
+        .bloque-estado .contador {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #6c757d;
+            background: #f1f3f5;
+            border-radius: 999px;
+            padding: 0.15rem 0.7rem;
+        }
+
+        /* Las tarjetas cerradas se ven un poco "apagadas" */
+        .bloque-cerradas .card { opacity: 0.85; }
+
+        /* ====== MODAL DE DETALLE DE CONVOCATORIA ====== */
+        .conv-modal .modal-content {
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;   /* MÓVIL: imagen arriba, texto abajo */
+        }
+
+        /* Imagen de la convocatoria (afiche completo, sin recortar ni ampliar) */
+        .conv-modal-img {
+            background-size: contain;       /* muestra el afiche ENTERO */
+            background-position: center;
+            background-repeat: no-repeat;   /* no repite al dejar franjas */
+            background-color: #f1f3f5;      /* color de las franjas (gris muy claro) */
+            position: relative;
+            flex: 0 0 auto;
+            min-height: 340px;              /* alto visible en móvil para afiches verticales */
+        }
+
+        /* Chip de estado flotando sobre la imagen */
+        .conv-modal-img .estado-chip {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+        }
+
+        .conv-modal-info {
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        /* ===== MÓVIL (<768px): imagen arriba fija, texto abajo con scroll propio ===== */
+        @media (max-width: 767.98px) {
+            /* Anula el centrado vertical en móvil para que la altura mande */
+            .conv-modal .modal-dialog.modal-dialog-centered {
+                align-items: stretch;
+            }
+            /* El diálogo ocupa el alto de la pantalla. vh como fallback, dvh si existe */
+            .conv-modal .modal-dialog {
+                margin: 0.5rem;
+                height: calc(100vh - 1rem);
+                height: calc(100dvh - 1rem);
+                max-height: calc(100vh - 1rem);
+                max-height: calc(100dvh - 1rem);
+            }
+            /* El contenido llena el diálogo y es flex en columna */
+            .conv-modal .modal-content {
+                height: 100%;
+                max-height: 100%;
+                min-height: 0;
+            }
+            /* El texto (debajo de la imagen) es la zona que scrollea.
+               flex:1 + min-height:0 es lo que permite el overflow dentro de un flex column */
+            .conv-modal-info {
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+        }
+
+        /* ===== ESCRITORIO (≥768px): imagen a la izquierda, texto a la derecha con scroll ===== */
+        @media (min-width: 768px) {
+            .conv-modal .modal-content {
+                flex-direction: row;
+                max-height: calc(100vh - 3.5rem);
+            }
+            .conv-modal-img {
+                flex: 0 0 42%;
+                min-height: 100%;
+            }
+            .conv-modal-info {
+                flex: 1 1 58%;
+                overflow-y: auto;          /* el texto scrollea en su columna */
+                overscroll-behavior: contain;
+            }
+        }
+
+        /* ===== Bloqueo del fondo cuando un modal está abierto (fix iOS) ===== */
+        body.modal-abierto {
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Lista de datos dentro del modal */
+        .conv-modal-datos li {
+            font-size: 0.92rem;
+        }
+
+        .conv-modal-datos li i {
+            width: 20px;
+            text-align: center;
+        }
+
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        /* ====== NAVBAR ANIMADA ====== */
+        .navbar {
+            transition: box-shadow 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
+        }
+
+        .navbar .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #0033a0 !important;
+        }
+
+        .navbar .nav-link:not(.dropdown-toggle)::after {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.35rem;
+            height: 2px;
+            background-color: #0033a0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .nav-link:not(.dropdown-toggle):hover::after,
+        .navbar .nav-link:not(.dropdown-toggle):focus::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== Menús desplegables (dropdown) ===== */
+        .navbar .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-weight: 500;
+            color: #334155;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0.6rem;
+            transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .navbar .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: #0033a0;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease;
+        }
+
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus {
+            background-color: #eef2ff;
+            color: #0033a0;
+            padding-left: 1.2rem;
+        }
+
+        .navbar .dropdown-item:hover i {
+            transform: scale(1.15);
+        }
+
+        /* ===== Animación + tarjeta flotante SOLO en escritorio (≥ 992px) ===== */
+        @media (min-width: 992px) {
+            .navbar .dropdown-menu {
+                display: block;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+                pointer-events: none;
+
+                margin-top: 0.6rem;
+                padding: 0.5rem;
+                min-width: 15rem;
+                border: 1px solid #eef2ff;
+                border-radius: 0.9rem;
+                box-shadow: 0 0.75rem 1.75rem rgba(0, 51, 160, 0.15);
+                background-color: #ffffff;
+            }
+
+            .navbar .dropdown-menu::before {
+                content: "";
+                display: block;
+                height: 3px;
+                width: 40px;
+                background-color: #0033a0;
+                border-radius: 999px;
+                margin: 0.15rem 0 0.5rem 0.75rem;
+            }
+
+            .navbar .dropdown-menu.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+        }
+        .btn-salud {
+            background-color: #0d9488;
+            color: #fff;
+        }
+        .btn-salud:hover {
+            background-color: #0f766e;
+            color: #fff;
+        }
+        /* ===== Botón "Comentarios y sugerencias" con elevación ===== */
+        .navbar .btn-institucional {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .navbar .btn-institucional:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 51, 160, 0.3);
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <!-- LOGO JAL -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+                <img src="./ASSETS/IMAGES/RECURSOS/logo.png" alt="Logo JAL Comuna 11 Medellín" height="50" width="60">
+            </a>
+
+            <!-- BOTÓN NAVEGACIÓN CELULAR -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarJAL"
+                aria-controls="navbarJAL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <div class="collapse navbar-collapse" id="navbarJAL">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Inicio</a>
+                    </li>
+
+                    <!-- DESPLEGABLE 1: La JAL -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            La JAL
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./LaJal.html">¿Qué es la JAL?</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#funciones">Funciones</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#normatividad">Normatividad</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#faq">Preguntas frecuentes</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#integrantes">Integrantes</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- DESPLEGABLE 2: Información -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="informacionDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Información
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="informacionDropdown">
+                            <li><a class="dropdown-item" href="./informacion.html#noticias">Noticias</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#decretos">Decretos</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pot">POT</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pdl">Plan de Desarrollo Local</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#sesiones">Sesiones en vivo</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- DESPLEGABLE 3: Presupuesto Participativo -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="ppDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Presupuesto Participativo
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="ppDropdown">
+                            <li><a class="dropdown-item" href="./pp.html#que-es">¿Qué es el P.P?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#fases">¿Cómo funciona?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#votar">¿Cómo participar?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#documentos">Documentos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="tramitesDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trámites
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="tramitesDropdown">
+                            <li><a class="dropdown-item" href="./certificados/index.php">
+                                <i class="fa-solid fa-file-signature"></i> Certificado de residencia
+                            </a></li>
+                        </ul>
+                    </li>
+                    <!-- NUEVO: Convocatorias (enlace directo, página actual) -->
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold active" aria-current="page" href="./convocatorias.html">Convocatorias</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-salud rounded-pill px-4 fw-bold shadow-sm" href="mental.html">
+                            <i class="fa-solid fa-heart-pulse me-1"></i>Mesa de Salud Mental
+                        </a>
+                    </li>
+                    <!-- BOTÓN Comentarios y sugerencias -->
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-institucional rounded-pill px-4 fw-bold shadow-sm"
+                            href="sugerencias.html">Comentarios y sugerencias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow-1" style="padding-top: 76px;">
+
+        <!-- HERO INTERNO -->
+        <section class="page-hero text-white py-5 text-center">
+            <div class="container py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-3">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-white-50 text-decoration-none">Inicio</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Convocatorias</li>
+                    </ol>
+                </nav>
+                <h1 class="display-5 fw-bold mb-2">Convocatorias</h1>
+                <p class="lead text-white-50 mb-0 mx-auto" style="max-width: 680px;">
+                    Conoce las convocatorias, invitaciones y oportunidades de participación que la Junta
+                    Administradora Local abre para la comunidad de la Comuna 11.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: LISTADO DE CONVOCATORIAS -->
+        <section id="convocatorias" class="py-5">
+            <div class="container py-2">
+
+                <!-- Encabezado de sección -->
+                <div class="mb-5">
+                    <h2 class="fw-bold text-institucional mb-1">Convocatorias</h2>
+                    <div class="bg-institucional rounded-pill" style="width: 60px; height: 3px;"></div>
+                </div>
+
+                <!-- ======================================================= -->
+                <!-- BLOQUE 1: ACTIVAS (verde) — SIEMPRE PRIMERO            -->
+                <!-- ======================================================= -->
+                <div class="bloque-activas mb-5">
+                    <div class="bloque-estado">
+                        <span class="bloque-dot verde"></span>
+                        <h2 class="fw-bold text-dark">Convocatorias activas</h2>
+                        <span class="contador">3 abiertas</span>
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- ===== TARJETA: ABIERTA (Prótesis dentales removibles) ===== -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden card-hover">
+                                <div class="conv-header" style="background-color: #1f9d4d;">
+                                    <span class="estado-chip conv-estado">
+                                        <span class="estado-dot verde"></span><span>Abierta</span>
+                                    </span>
+                                    <i class="fa-solid fa-tooth"></i>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1">
+                                        Salud · Presupuesto Participativo
+                                    </span>
+                                    <h3 class="h5 fw-bold text-dark mb-2">Programa de prótesis dentales removibles</h3>
+                                    <p class="card-text text-muted small mb-3">
+                                        ¡Queremos devolverte la sonrisa! Programa de la Política Pública de Salud Bucal de
+                                        Medellín para habitantes de la Comuna 11, ejecutado con recursos del Presupuesto
+                                        Participativo.
+                                    </p>
+                                    <ul class="list-unstyled conv-datos text-muted d-flex flex-column gap-2 mb-3">
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-calendar text-institucional"></i>
+                                            <span><strong class="text-dark">Fecha:</strong> 11 de noviembre de 2026.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-location-dot text-institucional"></i>
+                                            <span><strong class="text-dark">Lugar:</strong> Iglesia Madre del Verbo Divino, Carrera 64 # 42-116, San Joaquín.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-clock text-institucional"></i>
+                                            <span><strong class="text-dark">Horario:</strong> 9:00 a. m. a 4:00 p. m.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-users text-institucional"></i>
+                                            <span><strong class="text-dark">Dirigido a:</strong> habitantes de la comuna mayores de 18 años. ¡Cupos limitados!</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-auto pt-2 border-top">
+                                        <button type="button" class="btn btn-institucional btn-sm rounded-pill px-3 fw-semibold"
+                                            data-bs-toggle="modal" data-bs-target="#modalProtesis">
+                                            <i class="fa-solid fa-circle-info me-1"></i> Ver más información
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== TARJETA: ABIERTA (Elecciones Cabildo Mayor) ===== -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden card-hover">
+                                <div class="conv-header" style="background-color: #1e6091;">
+                                    <span class="estado-chip conv-estado">
+                                        <span class="estado-dot verde"></span><span>Abierta</span>
+                                    </span>
+                                    <i class="fa-solid fa-person-cane"></i>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1">
+                                        Personas mayores
+                                    </span>
+                                    <h3 class="h5 fw-bold text-dark mb-2">Elecciones Cabildo Mayor 2026</h3>
+                                    <p class="card-text text-muted small mb-3">
+                                        ¡Inscríbete como votante y haz que tu voz sea escuchada! Convocatoria para las
+                                        personas mayores de la Comuna 11 - Laureles-Estadio.
+                                    </p>
+                                    <ul class="list-unstyled conv-datos text-muted d-flex flex-column gap-2 mb-3">
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-calendar text-institucional"></i>
+                                            <span><strong class="text-dark">Fecha:</strong> 9 de noviembre.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-clock text-institucional"></i>
+                                            <span><strong class="text-dark">Horario:</strong> 8:00 a. m. a 4:00 p. m.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-users text-institucional"></i>
+                                            <span><strong class="text-dark">Dirigido a:</strong> personas mayores de 50 años.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-location-dot text-institucional"></i>
+                                            <span><strong class="text-dark">Puntos:</strong> 4 sedes de inscripción en la comuna.</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-auto pt-2 border-top">
+                                        <button type="button" class="btn btn-institucional btn-sm rounded-pill px-3 fw-semibold"
+                                            data-bs-toggle="modal" data-bs-target="#modalCabildo">
+                                            <i class="fa-solid fa-circle-info me-1"></i> Ver más información
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== TARJETA: ABIERTA (Educación / Sapiencia) ===== -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden card-hover">
+                                <div class="conv-header" style="background-color: #9d4edd;">
+                                    <span class="estado-chip conv-estado">
+                                        <span class="estado-dot verde"></span><span>Abierta</span>
+                                    </span>
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1">
+                                        Educación
+                                    </span>
+                                    <h3 class="h5 fw-bold text-dark mb-2">Difusión: becas y Matrícula Cero (Sapiencia)</h3>
+                                    <p class="card-text text-muted small mb-3">
+                                        La JAL difunde las convocatorias de educación superior de la Alcaldía de Medellín a
+                                        través de Sapiencia, para que más jóvenes de la comuna accedan a estudios.
+                                    </p>
+                                    <ul class="list-unstyled conv-datos text-muted d-flex flex-column gap-2 mb-3">
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-building-columns text-institucional"></i>
+                                            <span><strong class="text-dark">Entidad:</strong> Sapiencia - Alcaldía de Medellín.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-user-graduate text-institucional"></i>
+                                            <span><strong class="text-dark">Dirigido a:</strong> jóvenes y adultos de Medellín.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-up-right-from-square text-institucional"></i>
+                                            <span>
+                                                <strong class="text-dark">Sitio oficial:</strong>
+                                                <a href="https://sapiencia.gov.co/convocatorias/" target="_blank" rel="noopener" class="text-institucional fw-semibold">sapiencia.gov.co</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-auto pt-2 border-top">
+                                        <button type="button" class="btn btn-institucional btn-sm rounded-pill px-3 fw-semibold"
+                                            data-bs-toggle="modal" data-bs-target="#modalSapiencia">
+                                            <i class="fa-solid fa-circle-info me-1"></i> Ver más información
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ======================================================= -->
+                <!-- BLOQUE 2: PRÓXIMAMENTE (amarillo) — SIEMPRE SEGUNDO    -->
+                <!-- ======================================================= -->
+                <div class="bloque-proximas mb-5">
+                    <div class="bloque-estado">
+                        <span class="bloque-dot amarillo"></span>
+                        <h2 class="fw-bold text-dark">Próximamente</h2>
+                        <span class="contador">2 en camino</span>
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- ===== TARJETA: PRÓXIMAMENTE (Cultura) ===== -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden card-hover">
+                                <div class="conv-header" style="background-color: #1e6091;">
+                                    <span class="estado-chip conv-estado">
+                                        <span class="estado-dot amarillo"></span><span>Próximamente</span>
+                                    </span>
+                                    <i class="fa-solid fa-masks-theater"></i>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1">
+                                        Cultura
+                                    </span>
+                                    <h3 class="h5 fw-bold text-dark mb-2">Muestra cultural de la Comuna 11</h3>
+                                    <p class="card-text text-muted small mb-3">
+                                        Convocatoria para artistas, colectivos y agrupaciones culturales del territorio
+                                        que deseen participar en la muestra cultural de fin de año.
+                                    </p>
+                                    <ul class="list-unstyled conv-datos text-muted d-flex flex-column gap-2 mb-3">
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-calendar text-institucional"></i>
+                                            <span><strong class="text-dark">Apertura:</strong> diciembre de 2026.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-palette text-institucional"></i>
+                                            <span><strong class="text-dark">Dirigido a:</strong> artistas y colectivos de la comuna.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-gift text-institucional"></i>
+                                            <span><strong class="text-dark">Beneficio:</strong> espacio de exhibición y reconocimiento.</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-auto pt-2 border-top">
+                                        <a href="./sugerencias.html" class="text-institucional fw-bold text-decoration-none small">
+                                            <i class="fa-solid fa-circle-info me-1"></i> Para más información, contáctanos
+                                            <i class="fa-solid fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== TARJETA: PRÓXIMAMENTE (Medio ambiente) ===== -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden card-hover">
+                                <div class="conv-header" style="background-color: #e07a00;">
+                                    <span class="estado-chip conv-estado">
+                                        <span class="estado-dot amarillo"></span><span>Próximamente</span>
+                                    </span>
+                                    <i class="fa-solid fa-seedling"></i>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1">
+                                        Medio ambiente
+                                    </span>
+                                    <h3 class="h5 fw-bold text-dark mb-2">Jornada de siembra y recuperación de zonas verdes</h3>
+                                    <p class="card-text text-muted small mb-3">
+                                        Convocatoria para voluntarios que quieran sumarse a la jornada ambiental de siembra
+                                        y recuperación de zonas verdes en los barrios de la comuna.
+                                    </p>
+                                    <ul class="list-unstyled conv-datos text-muted d-flex flex-column gap-2 mb-3">
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-calendar text-institucional"></i>
+                                            <span><strong class="text-dark">Apertura:</strong> enero de 2027.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-hand-holding-hand text-institucional"></i>
+                                            <span><strong class="text-dark">Dirigido a:</strong> voluntarios y organizaciones ambientales.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-leaf text-institucional"></i>
+                                            <span><strong class="text-dark">Objetivo:</strong> mejorar los espacios públicos del territorio.</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-auto pt-2 border-top">
+                                        <a href="./sugerencias.html" class="text-institucional fw-bold text-decoration-none small">
+                                            <i class="fa-solid fa-circle-info me-1"></i> Para más información, contáctanos
+                                            <i class="fa-solid fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ======================================================= -->
+                <!-- BLOQUE 3: CERRADAS (rojo) — SIEMPRE AL FINAL           -->
+                <!-- ======================================================= -->
+                <div class="bloque-cerradas mb-4">
+                    <div class="bloque-estado">
+                        <span class="bloque-dot rojo"></span>
+                        <h2 class="fw-bold text-dark">Convocatorias cerradas</h2>
+                        <span class="contador">1 finalizada</span>
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- ===== TARJETA: CERRADA (Veeduría) ===== -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden card-hover">
+                                <div class="conv-header" style="background-color: #6c757d;">
+                                    <span class="estado-chip conv-estado">
+                                        <span class="estado-dot rojo"></span><span>Cerrada</span>
+                                    </span>
+                                    <i class="fa-solid fa-hand-holding-heart"></i>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1">
+                                        Participación ciudadana
+                                    </span>
+                                    <h3 class="h5 fw-bold text-dark mb-2">Conformación de veeduría ciudadana</h3>
+                                    <p class="card-text text-muted small mb-3">
+                                        Convocatoria para que la comunidad se postule a la veeduría ciudadana de obras
+                                        públicas del territorio. Esta convocatoria ya finalizó.
+                                    </p>
+                                    <ul class="list-unstyled conv-datos text-muted d-flex flex-column gap-2 mb-3">
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-regular fa-calendar text-institucional"></i>
+                                            <span><strong class="text-dark">Cerró el:</strong> 30 de septiembre de 2026.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-users text-institucional"></i>
+                                            <span><strong class="text-dark">Dirigido a:</strong> habitantes mayores de edad de la comuna.</span>
+                                        </li>
+                                        <li class="d-flex gap-2">
+                                            <i class="fa-solid fa-circle-check text-institucional"></i>
+                                            <span><strong class="text-dark">Estado:</strong> proceso finalizado.</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mt-auto pt-2 border-top">
+                                        <a href="./sugerencias.html" class="text-institucional fw-bold text-decoration-none small">
+                                            <i class="fa-solid fa-circle-info me-1"></i> Para más información, contáctanos
+                                            <i class="fa-solid fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Bloque de ayuda / llamado al contacto -->
+                <div class="card border-0 shadow-sm rounded-4 mt-5 bg-institucional text-white">
+                    <div class="card-body p-4 p-lg-5 d-flex flex-column flex-md-row align-items-md-center gap-3 text-center text-md-start">
+                        <i class="fa-solid fa-bullhorn fs-1"></i>
+                        <div class="flex-grow-1">
+                            <h3 class="h5 fw-bold mb-1">¿Tienes dudas sobre alguna convocatoria?</h3>
+                            <p class="small text-white-50 mb-0">
+                                Escríbenos o acércate a nuestra sede. Estamos para resolver tus preguntas y acompañarte
+                                en tu participación.
+                            </p>
+                        </div>
+                        <a href="./sugerencias.html" class="btn btn-light text-institucional fw-bold rounded-pill px-4 flex-shrink-0">
+                            Contáctanos <i class="fa-solid fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- MODAL: DETALLE CONVOCATORIA SAPIENCIA                  -->
+        <!-- ======================================================= -->
+        <div class="modal fade conv-modal" id="modalSapiencia" tabindex="-1" aria-labelledby="modalSapienciaLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- IZQUIERDA (móvil: arriba): imagen -->
+                    <div class="conv-modal-img"
+                        style="background-image: linear-gradient(rgba(0,51,160,0.15), rgba(0,31,102,0.35)), url('./ASSETS/IMAGES/CONVOCATORIAS/sapiencia.jpeg');">
+                        <span class="estado-chip">
+                            <span class="estado-dot verde"></span><span>Abierta</span>
+                        </span>
+                    </div>
+
+                    <!-- DERECHA (móvil: abajo): información extensa (zona con scroll) -->
+                    <div class="conv-modal-info">
+                        <div class="modal-header border-0 pb-0">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body px-4 pb-4 pt-2">
+                            <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1" style="font-size:0.72rem; letter-spacing:0.5px;">
+                                Educación
+                            </span>
+                                <h2 class="h4 fw-bold text-dark mb-3" id="modalSapienciaLabel">
+                                    Becas y Matrícula Cero (Sapiencia)
+                                </h2>
+
+                                <p class="text-muted">
+                                    La Junta Administradora Local de la Comuna 11 difunde las convocatorias de educación
+                                    superior que la Alcaldía de Medellín ofrece a través de <strong>Sapiencia</strong>
+                                    (Agencia de Educación Postsecundaria de Medellín), con el fin de que más jóvenes y
+                                    adultos del territorio puedan acceder a estudios técnicos, tecnológicos y universitarios.
+                                </p>
+
+                                <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                    <i class="fa-solid fa-circle-check me-1"></i> ¿Qué incluye?
+                                </h3>
+                                <ul class="text-muted">
+                                    <li><strong>Matrícula Cero:</strong> cubre el valor de la matrícula en instituciones públicas de educación superior.</li>
+                                    <li><strong>Fondos y becas:</strong> apoyos para estudios en instituciones públicas y privadas.</li>
+                                    <li><strong>Sostenimiento:</strong> en algunas convocatorias, apoyo económico complementario.</li>
+                                </ul>
+
+                                <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                    <i class="fa-solid fa-list-check me-1"></i> Detalles de la convocatoria
+                                </h3>
+                                <ul class="list-unstyled conv-modal-datos text-muted d-flex flex-column gap-2">
+                                    <li class="d-flex gap-2">
+                                        <i class="fa-solid fa-building-columns text-institucional"></i>
+                                        <span><strong class="text-dark">Entidad:</strong> Sapiencia - Alcaldía de Medellín.</span>
+                                    </li>
+                                    <li class="d-flex gap-2">
+                                        <i class="fa-solid fa-user-graduate text-institucional"></i>
+                                        <span><strong class="text-dark">Dirigido a:</strong> jóvenes y adultos habitantes de Medellín que deseen cursar estudios de educación superior.</span>
+                                    </li>
+                                    <li class="d-flex gap-2">
+                                        <i class="fa-solid fa-location-dot text-institucional"></i>
+                                        <span><strong class="text-dark">Cobertura:</strong> todas las comunas de Medellín, incluida la Comuna 11.</span>
+                                    </li>
+                                    <li class="d-flex gap-2">
+                                        <i class="fa-regular fa-calendar text-institucional"></i>
+                                        <span><strong class="text-dark">Fechas:</strong> las aperturas y cierres se publican en el sitio oficial de Sapiencia según cada convocatoria.</span>
+                                    </li>
+                                </ul>
+
+                                <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                    <i class="fa-solid fa-circle-info me-1"></i> ¿Cómo postularme?
+                                </h3>
+                                <p class="text-muted mb-0">
+                                    Las inscripciones se realizan directamente en el portal de Sapiencia, donde encontrarás
+                                    los requisitos, el cronograma y el formulario de cada convocatoria. Si necesitas
+                                    orientación, puedes acercarte a la sede de la JAL o escribirnos.
+                                </p>
+                            </div>
+
+                            <div class="modal-footer border-0 px-4 pb-4 pt-0 d-flex flex-wrap gap-2">
+                                <a href="https://sapiencia.gov.co/fondos-sapiencia/pregrados/" target="_blank" rel="noopener"
+                                    class="btn btn-institucional rounded-pill px-4 fw-semibold">
+                                    <i class="fa-solid fa-up-right-from-square me-1"></i> Ir al sitio oficial
+                                </a>
+                                <a href="./sugerencias.html" class="btn btn-outline-secondary rounded-pill px-4 fw-semibold">
+                                    <i class="fa-solid fa-envelope me-1"></i> Contáctanos
+                                </a>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- MODAL: DETALLE PRÓTESIS DENTALES REMOVIBLES            -->
+        <!-- ======================================================= -->
+        <div class="modal fade conv-modal" id="modalProtesis" tabindex="-1" aria-labelledby="modalProtesisLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- IZQUIERDA (móvil: arriba): imagen -->
+                    <div class="conv-modal-img"
+                        style="background-image: linear-gradient(rgba(31,157,77,0.15), rgba(20,100,50,0.35)), url('./ASSETS/IMAGES/CONVOCATORIAS/protesis.jpeg');">
+                        <span class="estado-chip">
+                            <span class="estado-dot verde"></span><span>Abierta</span>
+                        </span>
+                    </div>
+
+                    <!-- DERECHA (móvil: abajo): información extensa (zona con scroll) -->
+                    <div class="conv-modal-info">
+                        <div class="modal-header border-0 pb-0">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body px-4 pb-4 pt-2">
+                            <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1" style="font-size:0.72rem; letter-spacing:0.5px;">
+                                Salud · Presupuesto Participativo
+                            </span>
+                            <h2 class="h4 fw-bold text-dark mb-3" id="modalProtesisLabel">
+                                Programa de prótesis dentales removibles
+                            </h2>
+
+                            <p class="text-muted">
+                                <strong>¡Queremos devolverte la sonrisa!</strong> Este programa hace parte de la
+                                Política Pública de Salud Bucal de Medellín y se ejecuta con recursos del Presupuesto
+                                Participativo, para que los habitantes de la Comuna 11 accedan a prótesis dentales
+                                removibles de forma gratuita.
+                            </p>
+
+                            <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                <i class="fa-solid fa-clipboard-check me-1"></i> Requisitos para la inscripción
+                            </h3>
+                            <ul class="text-muted">
+                                <li>Ser habitante de la comuna y tener 18 años o más.</li>
+                                <li>Carecer de uno o más dientes en el arco superior y/o inferior.</li>
+                                <li>No haber sido beneficiario de prótesis acrílica o total en los últimos 3 años, ni de prótesis metálicas en los últimos 4 años.</li>
+                                <li>Asistir a las jornadas de selección de pacientes, convocadas por la Secretaría de Salud y apoyadas por las autoridades comunitarias.</li>
+                                <li>Presentar, en la etapa de preselección, copia del documento de identidad y la última cuenta de servicios públicos.</li>
+                            </ul>
+
+                            <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                <i class="fa-solid fa-list-check me-1"></i> Detalles de la jornada
+                            </h3>
+                            <ul class="list-unstyled conv-modal-datos text-muted d-flex flex-column gap-2">
+                                <li class="d-flex gap-2">
+                                    <i class="fa-solid fa-users text-institucional"></i>
+                                    <span><strong class="text-dark">Comuna:</strong> Comuna 11 - Laureles.</span>
+                                </li>
+                                <li class="d-flex gap-2">
+                                    <i class="fa-solid fa-location-dot text-institucional"></i>
+                                    <span><strong class="text-dark">Lugar:</strong> Iglesia Madre del Verbo Divino, Carrera 64 # 42-116, San Joaquín.</span>
+                                </li>
+                                <li class="d-flex gap-2">
+                                    <i class="fa-regular fa-clock text-institucional"></i>
+                                    <span><strong class="text-dark">Horario:</strong> 9:00 a. m. a 4:00 p. m.</span>
+                                </li>
+                                <li class="d-flex gap-2">
+                                    <i class="fa-regular fa-calendar text-institucional"></i>
+                                    <span><strong class="text-dark">Fecha:</strong> 11 de noviembre de 2026.</span>
+                                </li>
+                            </ul>
+
+                            <p class="fw-bold text-institucional mt-3 mb-0">
+                                <i class="fa-solid fa-triangle-exclamation me-1"></i> ¡Cupos limitados!
+                            </p>
+                            <p class="text-muted small mt-2 mb-0">
+                                Proyecto ejecutado con recursos del Presupuesto Participativo — Alcaldía de Medellín,
+                                Ciencia, Tecnología e Innovación.
+                            </p>
+                        </div>
+
+                        <div class="modal-footer border-0 px-4 pb-4 pt-0 d-flex flex-wrap gap-2">
+                            <a href="./sugerencias.html" class="btn btn-institucional rounded-pill px-4 fw-semibold">
+                                <i class="fa-solid fa-envelope me-1"></i> Más información / Contáctanos
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- MODAL: DETALLE CONVOCATORIA TORNEO DEPORTIVO           -->
+        <!-- ======================================================= -->
+        <div class="modal fade conv-modal" id="modalCabildo" tabindex="-1" aria-labelledby="modalCabildoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- IZQUIERDA (móvil: arriba): imagen -->
+                    <div class="conv-modal-img"
+                        style="background-image: linear-gradient(rgba(30,96,145,0.15), rgba(10,40,80,0.45)), url('./ASSETS/IMAGES/CONVOCATORIAS/elecciones.jpeg');">
+                        <span class="estado-chip">
+                            <span class="estado-dot verde"></span><span>Abierta</span>
+                        </span>
+                    </div>
+
+                    <!-- DERECHA (móvil: abajo): información extensa (zona con scroll) -->
+                    <div class="conv-modal-info">
+                        <div class="modal-header border-0 pb-0">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body px-4 pb-4 pt-2">
+                            <span class="text-uppercase text-institucional fw-bold conv-categoria d-block mb-1" style="font-size:0.72rem; letter-spacing:0.5px;">
+                                Personas mayores
+                            </span>
+                            <h2 class="h4 fw-bold text-dark mb-3" id="modalCabildoLabel">
+                                Elecciones Cabildo Mayor 2026
+                            </h2>
+
+                            <p class="text-muted">
+                                <strong>¡Tu voto cuenta!</strong> Inscríbete como votante y haz que tu voz sea escuchada.
+                                Convocatoria dirigida a las personas mayores de la Comuna 11 - Laureles-Estadio para las
+                                Elecciones del Cabildo Mayor 2026.
+                            </p>
+
+                            <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                <i class="fa-solid fa-location-dot me-1"></i> Puntos de inscripción en la comuna
+                            </h3>
+                            <div class="table-responsive">
+                                <table class="table table-sm align-middle small">
+                                    <thead>
+                                        <tr class="text-institucional">
+                                            <th scope="col">Barrio / sector</th>
+                                            <th scope="col">Dirección</th>
+                                            <th scope="col">Punto de inscripción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-muted">
+                                        <tr>
+                                            <td><strong class="text-dark">Laureles-Estadio</strong></td>
+                                            <td>Carrera 77B # 53-26</td>
+                                            <td>Casa de Cultura Los Colores</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="text-dark">Laureles</strong></td>
+                                            <td>Avenida 39D # 73-113 (Primer Parque de Laureles)</td>
+                                            <td>Centro de Desarrollo Social Laureles</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="text-dark">Barrio Estadio</strong></td>
+                                            <td>Carrera 70 # 49-70</td>
+                                            <td>I. E. Marco Fidel Suárez</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="text-dark">Lorena</strong></td>
+                                            <td>Carrera 79A # 42-42</td>
+                                            <td>Iglesia La Consolata</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                <i class="fa-solid fa-list-check me-1"></i> Detalles
+                            </h3>
+                            <ul class="list-unstyled conv-modal-datos text-muted d-flex flex-column gap-2">
+                                <li class="d-flex gap-2">
+                                    <i class="fa-regular fa-calendar text-institucional"></i>
+                                    <span><strong class="text-dark">Fecha:</strong> 9 de noviembre.</span>
+                                </li>
+                                <li class="d-flex gap-2">
+                                    <i class="fa-regular fa-clock text-institucional"></i>
+                                    <span><strong class="text-dark">Horario:</strong> 8:00 a. m. a 4:00 p. m.</span>
+                                </li>
+                            </ul>
+
+                            <h3 class="h6 fw-bold text-institucional mt-4 mb-2">
+                                <i class="fa-solid fa-clipboard-check me-1"></i> ¿Qué necesitas para inscribirte?
+                            </h3>
+                            <ul class="text-muted">
+                                <li>Ser mayor de 50 años.</li>
+                                <li>Presentar tu cédula de ciudadanía.</li>
+                            </ul>
+
+                            <div class="alert alert-light border mt-3 mb-0 small">
+                                <strong class="text-institucional"><i class="fa-solid fa-triangle-exclamation me-1"></i> ¡Importante!</strong>
+                                No requieres inscripción si perteneces a clubes de vida, Centro Vida Gerontológico,
+                                Dormitorio Social, Colonia Belencito o la red de hogares de larga estancia.
+                                Proceso electoral con fundamento en el Decreto 1256 de 2008.
+                            </div>
+                        </div>
+
+                        <div class="modal-footer border-0 px-4 pb-4 pt-0 d-flex flex-wrap gap-2">
+                            <a href="./sugerencias.html" class="btn btn-institucional rounded-pill px-4 fw-semibold">
+                                <i class="fa-solid fa-envelope me-1"></i> Más información / Contáctanos
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-5 pb-4 border-top border-4 border-primary mt-auto">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="fa-solid fa-landmark fs-3 text-white"></i>
+                        <span class="fw-bold fs-5">JAL Comuna 11</span>
+                    </div>
+                    <p class="text-secondary small leading-relaxed">
+                        Sitio web oficial de la Junta Administradora Local de la Comuna 11. Trabajando por la
+                        transparencia, la gestión eficiente y el desarrollo de nuestro territorio.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Enlaces Institucionales</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><a href="https://www.medellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Alcaldía de Medellín</a></li>
+                        <li><a href="https://www.concejodemedellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Concejo de Medellín</a></li>
+                        <li><a href="LaJal.html#integrantes" class="text-secondary text-decoration-none">Directorio de Ediles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Atención al Ciudadano</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><i class="fa-solid fa-map-location-dot me-2"></i> Cl. 39d #73-113, Primer Parque de Laureles, Laureles-Estadio (Comuna 11), Medellín.</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> jal.laureles11@gmail.com</li>
+                    </ul>
+                    <h3 class="h6 fw-bold mb-3 mt-4 text-uppercase border-bottom border-secondary pb-2">Síguenos</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li>
+                            <a href="https://chat.whatsapp.com/KkKgIqyjIi62TdYUuVUghY" target="_blank" rel="noopener" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-whatsapp me-2"></i> Canal de WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/jal11med/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-instagram me-2"></i> Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/p/Jal-Comuna-Once-Medell%C3%ADn-100092500651921/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-facebook me-2"></i> Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-3 text-center text-secondary small">
+                <p class="mb-0">&copy; 2026 JAL Comuna 11 - Medellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bloquea el scroll del fondo cuando un modal está abierto (soluciona el "arrastre" del fondo en móvil/iOS) -->
+    <script>
+        (function () {
+            var scrollY = 0;
+            document.querySelectorAll('.modal.conv-modal').forEach(function (modal) {
+                modal.addEventListener('show.bs.modal', function () {
+                    scrollY = window.scrollY || window.pageYOffset;
+                    document.body.style.top = (-scrollY) + 'px';
+                    document.body.classList.add('modal-abierto');
+                });
+                modal.addEventListener('hidden.bs.modal', function () {
+                    document.body.classList.remove('modal-abierto');
+                    document.body.style.top = '';
+                    window.scrollTo(0, scrollY);
+                });
+            });
+        })();
+           //Abre automáticamente el modal de la convocatoria indicada en la URL (?conv=...)
+        (function () {
+            // Relaciona el valor de ?conv= con el id del modal
+            var mapa = {
+                cabildo:   'modalCabildo',
+                protesis:  'modalProtesis',
+                sapiencia: 'modalSapiencia'
+            };
+
+            var params = new URLSearchParams(window.location.search);
+            var conv = params.get('conv');
+
+            if (conv && mapa[conv]) {
+                var el = document.getElementById(mapa[conv]);
+                if (el) {
+                    var modal = new bootstrap.Modal(el);
+                    modal.show();
+
+                    // Limpia el parámetro de la URL para que al recargar no se reabra solo
+                    if (window.history.replaceState) {
+                        window.history.replaceState(null, '', window.location.pathname);
+                    }
+                }
+            }
+        })();
+    </script>
+
+</body>
+
+</html>

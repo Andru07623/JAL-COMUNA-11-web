@@ -1,0 +1,20 @@
+# ============================================================
+#  .htaccess — JAL Comuna 11
+# ============================================================
+
+# ---- 1. Forzar HTTPS (redirige http -> https) ----
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ---- 2. Proteger el archivo de credenciales ----
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# ---- 3. Bloquear acceso directo a la carpeta PHPMailer ----
+RewriteRule ^PHPMailer/ - [F,L]
+
+# ---- 4. Ocultar listados de directorios ----
+Options -Indexes

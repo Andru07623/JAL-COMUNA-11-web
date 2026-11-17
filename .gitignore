@@ -1,0 +1,51 @@
+# ============================================================
+#  .gitignore — JAL Comuna 11
+#  Evita subir credenciales y datos de ciudadanos al repo público.
+# ============================================================
+
+# ---- Credenciales (SMTP Brevo, MySQL, etc.) ----
+# Los config.php reales NUNCA se suben. Solo van los *.example.php.
+config.php
+certificados/config.php
+secrets.php
+*.secrets.php
+
+# ---- Datos personales de ciudadanos (Ley 1581 / Habeas Data) ----
+# Adjuntos subidos por ciudadanos: cédulas, recibos EPM, etc.
+certificados/uploads/*
+# Certificados PDF generados automáticamente
+certificados/certificados_generados/*
+# NOTA: no se ignoran los PDF de forma global, para que en el futuro
+# puedas publicar decretos/planes en PDF. Solo se ignoran los PDF
+# dentro de las carpetas de datos de ciudadanos (arriba).
+
+# Pero SÍ conservamos los archivos "guardianes" de esas carpetas
+# (.htaccess e index.html) para que existan en el servidor vacías.
+!certificados/uploads/.htaccess
+!certificados/uploads/index.html
+!certificados/certificados_generados/.htaccess
+!certificados/certificados_generados/index.html
+
+# ---- Logs ----
+*.log
+error_log
+logs/
+certificados/*.log
+certificados/**/*.log
+
+# ---- Volcados / respaldos de base de datos (pueden traer datos reales) ----
+# La estructura vacía SÍ se sube (certificados/sql/estructura.sql),
+# pero los respaldos con datos NO.
+*.sql.gz
+*.sql.zip
+*backup*.sql
+*dump*.sql
+*datos*.sql
+
+# ---- Archivos temporales / del sistema ----
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*~
+.env

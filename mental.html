@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa de Salud Mental - Comuna 11</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./ASSETS/IMAGES/RECURSOS/logo.png">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        /* Color institucional */
+        .bg-institucional {
+            background-color: #0033a0 !important;
+        }
+        .text-institucional {
+            color: #0033a0 !important;
+        }
+        .btn-institucional {
+            background-color: #0033a0;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-institucional:hover {
+            background-color: #001f66;
+            color: #ffffff;
+        }
+
+        /* Animación suave para tarjetas */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        /* Forzar el peso correcto de los íconos Font Awesome */
+        .fa-solid,
+        .fas {
+            font-weight: 900 !important;
+        }
+        .fa-regular,
+        .far {
+            font-weight: 400 !important;
+        }
+
+        /* ====== NAVBAR ANIMADA ====== */
+        .navbar {
+            transition: box-shadow 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
+        }
+        .navbar .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #0033a0 !important;
+        }
+        .navbar .nav-link:not(.dropdown-toggle)::after {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.35rem;
+            height: 2px;
+            background-color: #0033a0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.3s ease;
+        }
+        .navbar .nav-link:not(.dropdown-toggle):hover::after,
+        .navbar .nav-link:not(.dropdown-toggle):focus::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== Menús desplegables (dropdown) ===== */
+        .navbar .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-weight: 500;
+            color: #334155;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0.6rem;
+            transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+        }
+        .navbar .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: #0033a0;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease;
+        }
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus {
+            background-color: #eef2ff;
+            color: #0033a0;
+            padding-left: 1.2rem;
+        }
+        .navbar .dropdown-item:hover i {
+            transform: scale(1.15);
+        }
+
+        @media (min-width: 992px) {
+            .navbar .dropdown-menu {
+                display: block;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+                pointer-events: none;
+                margin-top: 0.6rem;
+                padding: 0.5rem;
+                min-width: 15rem;
+                border: 1px solid #eef2ff;
+                border-radius: 0.9rem;
+                box-shadow: 0 0.75rem 1.75rem rgba(0, 51, 160, 0.15);
+                background-color: #ffffff;
+            }
+            .navbar .dropdown-menu::before {
+                content: "";
+                display: block;
+                height: 3px;
+                width: 40px;
+                background-color: #0033a0;
+                border-radius: 999px;
+                margin: 0.15rem 0 0.5rem 0.75rem;
+            }
+            .navbar .dropdown-menu.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+        }
+
+        /* Botones del navbar con elevación */
+        .navbar .btn-institucional,
+        .navbar .btn-salud {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+        .navbar .btn-institucional:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 51, 160, 0.3);
+        }
+        .navbar .btn-salud:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(13, 148, 136, 0.3);
+        }
+
+        /* Botón Salud Mental (verde teal) */
+        .btn-salud {
+            background-color: #0d9488;
+            color: #fff;
+        }
+        .btn-salud:hover {
+            background-color: #0f766e;
+            color: #fff;
+        }
+        .text-salud { color: #0d9488 !important; }
+        .bg-salud { background-color: #0d9488 !important; }
+        .bg-salud-suave { background-color: #e6f5f3 !important; }
+
+        /* ====== HERO INTERNO ====== */
+        .hero-salud {
+            background: linear-gradient(135deg, rgba(13,148,136,0.92), rgba(0,51,160,0.9));
+            color: #fff;
+            padding: 8rem 0 4rem;   /* 8rem arriba para dejar espacio al navbar fixed-top */
+        }
+        .hero-salud h1 { font-weight: 700; }
+        .breadcrumb-item a { color: #cdeeea; text-decoration: none; }
+        .breadcrumb-item.active { color: #fff; }
+
+        /* Separador de sección */
+        .section-line {
+            width: 60px;
+            height: 3px;
+            background-color: #0d9488;
+            border-radius: 999px;
+        }
+
+        /* Tarjetas de líneas de ayuda */
+        .card-linea .icono-circ {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1rem;
+        }
+
+        /* Banner emergencia */
+        .banner-emergencia {
+            background: linear-gradient(135deg, #b91c1c, #dc2626);
+            color: #fff;
+            border-radius: 1rem;
+        }
+        .banner-emergencia .num-emergencia {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* Galería */
+        .galeria-item {
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            aspect-ratio: 4 / 3;
+        }
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .galeria-item:hover img { transform: scale(1.08); }
+
+        @media (max-width: 767.98px) {
+            .hero-salud { padding: 6.5rem 0 3rem; }
+            .banner-emergencia .num-emergencia { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <!-- LOGO JAL -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+                <img src="./ASSETS/IMAGES/RECURSOS/logo.png" alt="Logo JAL Comuna 11 Medellín" height="50" width="60">
+            </a>
+
+            <!-- BOTON NAVEGACION CELULAR -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarJAL" aria-controls="navbarJAL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <div class="collapse navbar-collapse" id="navbarJAL">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            La JAL
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./LaJal.html">¿Qué es la JAL?</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#funciones">Funciones</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#normatividad">Normatividad</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#faq">Preguntas frecuentes</a></li>
+                            <li><a class="dropdown-item" href="./LaJal.html#integrantes">Integrantes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold " href="#" id="informacionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Información
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="informacionDropdown">
+                            <li><a class="dropdown-item" href="./informacion.html#noticias">Noticias</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#decretos">Decretos</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pot">POT</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#pdl">Plan de Desarrollo Local</a></li>
+                            <li><a class="dropdown-item" href="./informacion.html#sesiones">Sesiones en vivo</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="ppDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Presupuesto Participativo
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="ppDropdown">
+                            <li><a class="dropdown-item" href="./pp.html#que-es">¿Qué es el P.P?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#fases">¿Cómo funciona?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#votar">¿Cómo participar?</a></li>
+                            <li><a class="dropdown-item" href="./pp.html#documentos">Documentos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="tramitesDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trámites
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="tramitesDropdown">
+                            <li><a class="dropdown-item" href="./certificados/index.php">
+                                <i class="fa-solid fa-file-signature"></i> Certificado de residencia
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="convocatorias.html">Convocatorias</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-salud rounded-pill px-4 fw-bold shadow-sm" href="mental.html">
+                            <i class="fa-solid fa-heart-pulse me-1"></i>Mesa de Salud Mental
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-institucional rounded-pill px-4 fw-bold shadow-sm" href="sugerencias.html">Comentarios y sugerencias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO INTERNO -->
+        <header class="hero-salud">
+            <div class="container text-center">
+                <i class="fa-solid fa-heart-pulse mb-3" style="font-size:3rem;"></i>
+                <h1>Mesa de Salud Mental</h1>
+                <p class="lead col-lg-8 mx-auto mb-0">
+                    Cuidar tu bienestar emocional también es construir comuna. Aquí encuentras
+                    líneas de ayuda, atención psicológica gratuita y rutas de apoyo. No estás solo.
+                </p>
+                <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="./index.html">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Mesa de Salud Mental</li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+
+        <!-- BANNER EMERGENCIA -->
+        <section class="container position-relative z-2" style="margin-top:-2rem;">
+            <div class="banner-emergencia p-4 shadow">
+                <div class="row align-items-center text-center text-md-start g-3">
+                    <div class="col-md-8">
+                        <h4 class="fw-bold mb-1"><i class="fa-solid fa-triangle-exclamation me-2"></i>¿Estás en crisis o necesitas ayuda ya?</h4>
+                        <p class="mb-0">Llama en cualquier momento. La atención es <strong>gratuita, confidencial y las 24 horas</strong>.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="num-emergencia">106</div>
+                        <small>Línea de Salud Mental</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LÍNEAS DE AYUDA -->
+        <section class="py-5">
+            <div class="container text-center">
+                <h2 class="fw-bold text-institucional mb-2">Líneas de Ayuda</h2>
+                <div class="section-line mx-auto mb-3"></div>
+                <p class="col-lg-8 mx-auto text-muted mb-5">
+                    La Alcaldía de Medellín, a través de la Secretaría de Salud, ofrece orientación
+                    psicológica gratuita a todos los habitantes del Distrito.
+                </p>
+
+                <div class="row g-4">
+                    <!-- Línea 106 -->
+                    <div class="col-md-4">
+                        <div class="card card-linea card-hover h-100 border-0 shadow-sm rounded-3 p-4">
+                            <div class="icono-circ bg-salud-suave text-salud"><i class="fa-solid fa-phone-volume"></i></div>
+                            <h5 class="fw-bold">Línea 106</h5>
+                            <p class="text-muted small">Atención psicológica gratuita las 24 horas, los 7 días de la semana.</p>
+                            <a href="tel:106" class="btn btn-salud rounded-pill mt-auto">Marcar 106</a>
+                        </div>
+                    </div>
+                    <!-- Línea Amiga -->
+                    <div class="col-md-4">
+                        <div class="card card-linea card-hover h-100 border-0 shadow-sm rounded-3 p-4">
+                            <div class="icono-circ bg-salud-suave text-salud"><i class="fa-solid fa-headset"></i></div>
+                            <h5 class="fw-bold">Línea Amiga Saludable</h5>
+                            <p class="text-muted small">Orientación psicológica gratuita, en funcionamiento ininterrumpido desde 1998.</p>
+                            <a href="tel:6044444448" class="btn btn-salud rounded-pill mt-auto">604 444 44 48</a>
+                        </div>
+                    </div>
+                    <!-- WhatsApp FLOR -->
+                    <div class="col-md-4">
+                        <div class="card card-linea card-hover h-100 border-0 shadow-sm rounded-3 p-4">
+                            <div class="icono-circ bg-salud-suave text-salud"><i class="fa-brands fa-whatsapp"></i></div>
+                            <h5 class="fw-bold">WhatsApp FLOR</h5>
+                            <p class="text-muted small">Escribe y selecciona la opción <strong>“Salud”</strong> para recibir orientación.</p>
+                            <a href="https://wa.me/573016044444" target="_blank" rel="noopener" class="btn btn-salud rounded-pill mt-auto">301 604 4444</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-muted small mt-4 mb-0">
+                    <i class="fa-solid fa-circle-info me-1"></i>
+                    A través de estas líneas también se puede activar el <strong>Código Dorado</strong>, destinado a urgencias
+                    y emergencias en salud mental (comportamiento suicida, consumo de sustancias o estados de crisis).
+                </p>
+            </div>
+        </section>
+
+        <!-- ATENCIÓN GRATUITA EN MEDELLÍN -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fw-bold text-institucional mb-2">Atención Gratuita en Medellín</h2>
+                    <div class="section-line mx-auto mb-4"></div>
+                </div>
+                <div class="row g-4 align-items-stretch">
+                    <div class="col-lg-6">
+                        <div class="card border-0 shadow-sm h-100 p-4 card-hover">
+                            <h5 class="fw-bold text-salud"><i class="fa-solid fa-users me-2"></i>Escuchaderos</h5>
+                            <p class="text-muted mb-0">
+                                A través de la estrategia <strong>Escuchaderos</strong>, la Alcaldía brinda atención y
+                                orientación psicológica gratuita, acercando el apoyo emocional a las distintas comunas
+                                de la ciudad, incluida la nuestra.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card border-0 shadow-sm h-100 p-4 card-hover">
+                            <h5 class="fw-bold text-salud"><i class="fa-solid fa-user-doctor me-2"></i>Más de 400 psicólogos</h5>
+                            <p class="text-muted mb-0">
+                                La Administración Distrital dispone de un equipo de profesionales que acompañan a la
+                                comunidad en colegios, lugares de trabajo y entornos comunitarios para fortalecer la
+                                salud mental de los ciudadanos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-muted small mt-4 mb-0">
+                    Información oficial de la <a href="https://www.medellin.gov.co/es/secretaria-de-salud/salud-mental/" target="_blank" rel="noopener" class="text-institucional">Secretaría de Salud de Medellín</a>.
+                    Contenido adaptado con fines informativos.
+                </p>
+            </div>
+        </section>
+
+        <!-- GALERÍA -->
+        <section class="py-5">
+            <div class="container text-center">
+                <h2 class="fw-bold text-institucional mb-2">Galería</h2>
+                <div class="section-line mx-auto mb-3"></div>
+                <p class="col-lg-8 mx-auto text-muted mb-5">
+                    Momentos de las actividades y jornadas de la Mesa de Salud Mental en la Comuna 11.
+                </p>
+
+                <div class="row g-3">
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud1.jpeg" alt="Jornada de salud mental Comuna 11 - 1" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud2.jpeg" alt="Jornada de salud mental Comuna 11 - 2" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud3.jpeg" alt="Jornada de salud mental Comuna 11 - 3" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud4.jpeg" alt="Jornada de salud mental Comuna 11 - 4" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud5.jpeg" alt="Jornada de salud mental Comuna 11 - 5" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud6.jpeg" alt="Jornada de salud mental Comuna 11 - 6" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud7.jpeg" alt="Jornada de salud mental Comuna 11 - 7" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud8.jpeg" alt="Jornada de salud mental Comuna 11 - 8" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud9.jpeg" alt="Jornada de salud mental Comuna 11 - 9" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud10.jpeg" alt="Jornada de salud mental Comuna 11 - 10" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud11.jpeg" alt="Jornada de salud mental Comuna 11 - 11" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud12.jpeg" alt="Jornada de salud mental Comuna 11 - 12" loading="lazy"></div></div>
+                    <div class="col-6 col-md-4 col-lg-3"><div class="galeria-item"><img src="./ASSETS/IMAGES/SALUD/salud13.jpeg" alt="Jornada de salud mental Comuna 11 - 13" loading="lazy"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENSAJE EMPÁTICO -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="bg-salud-suave rounded-3 p-4 p-md-5 text-center">
+                    <i class="fa-solid fa-hand-holding-heart text-salud mb-3" style="font-size:2.5rem;"></i>
+                    <h3 class="fw-bold text-institucional">Pedir ayuda es un acto de valentía</h3>
+                    <p class="col-lg-8 mx-auto text-muted mb-0">
+                        Si tú o alguien que conoces está pasando por un momento difícil, no esperes.
+                        Hablar salva vidas. En la Comuna 11 te acompañamos, y la ciudad cuenta con
+                        profesionales listos para escucharte sin juzgar, de forma gratuita y confidencial.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-5 pb-4 border-top border-4 border-primary">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="fa-solid fa-landmark fs-3 text-white"></i>
+                        <span class="fw-bold fs-5">JAL Comuna 11</span>
+                    </div>
+                    <p class="text-secondary small leading-relaxed">
+                        Sitio web oficial de la Junta Administradora Local de la Comuna 11. Trabajando por la transparencia, la gestión eficiente y el desarrollo de nuestro territorio.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Enlaces Institucionales</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><a href="https://www.medellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Alcaldía de Medellín</a></li>
+                        <li><a href="https://www.concejodemedellin.gov.co" target="_blank" class="text-secondary text-decoration-none">Concejo de Medellín</a></li>
+                        <li><a href="LaJal.html#integrantes" class="text-secondary text-decoration-none">Directorio de Ediles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Atención al Ciudadano</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><i class="fa-solid fa-map-location-dot me-2"></i> Cl. 39d #73-113, Primer Parque de Laureles, Laureles-Estadio (Comuna 11), Medellín.</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> jal.laureles11@gmail.com</li>
+                    </ul>
+                    <h3 class="h6 fw-bold mb-3 mt-4 text-uppercase border-bottom border-secondary pb-2">Síguenos</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li>
+                            <a href="https://chat.whatsapp.com/KkKgIqyjIi62TdYUuVUghY" target="_blank" rel="noopener" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-whatsapp me-2"></i> Canal de WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/jal11med/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-instagram me-2"></i> Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/p/Jal-Comuna-Once-Medell%C3%ADn-100092500651921/" target="_blank" class="text-secondary text-decoration-none">
+                                <i class="fa-brands fa-facebook me-2"></i> Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-3 text-center text-secondary small">
+                <p class="mb-0">&copy; 2026 JAL Comuna 11 - Medellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS DE BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
